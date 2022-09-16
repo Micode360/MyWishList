@@ -2,7 +2,7 @@
 
 const Header = () => {
     return (
-        <div className="flex justify-between items-center shadow-lg shadow-black-500/10">
+        <div className="bg-white-400 flex justify-between items-center shadow-lg shadow-black-500/10">
             <div className="bg-wish-blue p-3">
                 <h1 className="text-white">My WishList</h1>
             </div>

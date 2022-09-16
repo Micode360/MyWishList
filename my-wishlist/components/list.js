@@ -6,7 +6,7 @@
 const List = () => {
 
     return (
-        <div className="flex flex-wrap md:justify-between lg:justify-between xl:justify-between justify-center align-center py-5">
+        <div className="bg-white-400 border-[1px] rounded border-slate-200 flex flex-wrap md:justify-between lg:justify-between xl:justify-between justify-center align-center">
 
             <div className="max-w-[18rem] md:max-w-[12rem] lg:max-w-[12rem] xl:max-w-[12rem] justify-center rounded overflow-hidden shadow-lg m-2">
             <img className="w-full" src="/img/0f5fff6262fdefb855e3a9a3f0fdd361.jpg" alt="Sunset in the mountains"/>

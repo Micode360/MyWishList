@@ -21,10 +21,10 @@ export default function Home() {
 
       <Banner/>
 
-      <section className='container px-3 py-6 mx-auto'>
+      <section className='container px-3 py-0 mx-auto'>
 
         <div className='md:grid md:grid-cols-3 sm:flex sm:flex-col sm:justify-center py-6'>
-          <div className="col-span-2 content">
+          <div className="col-span-2 mb-4 md:mb-0 lg:mb-0">
             {/* <button className="bg-white hover:bg-gray-100 text-gray-800 text-[0.7rem] text-left font-semibold py-1 px-4 border border-gray-400 rounded w-full">Add wish.....</button> */}
             <SearchBar/>
             {/* <Categories/> */}
