@@ -2,12 +2,12 @@
 
 const Header = () => {
     return (
-        <div>
-            <div>
-                <h1 className="text-wish-blue">My WishList</h1>
+        <div className="flex justify-between items-center shadow-lg shadow-black-500/10">
+            <div className="bg-wish-blue p-3">
+                <h1 className="text-white">My WishList</h1>
             </div>
-            <nav>
-                <button>add wish</button>
+            <nav className="p-1">
+                <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow text-[0.9rem]">add wish</button>
             </nav>
         </div>
     );
