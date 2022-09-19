@@ -1,16 +1,16 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import Banner from '../components/banner'
-import List from '../components/list'
+import Darshboard from '../components/darshboard'
 import SearchBar from '../components/searchBar'
 import WishList from '../components/wishlist'
+import AddWish from '../components/addWish'
 // import Categories from '../components/categories'
 
 
 export default function Home() {
   const date = new Date();
-
-
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -28,9 +28,11 @@ export default function Home() {
             {/* <button className="bg-white hover:bg-gray-100 text-gray-800 text-[0.7rem] text-left font-semibold py-1 px-4 border border-gray-400 rounded w-full">Add wish.....</button> */}
             <SearchBar/>
             {/* <Categories/> */}
-            <List/>
+            <Darshboard />
           </div>
           <WishList/>
+
+          <AddWish/>
         </div>
       </section>
      
