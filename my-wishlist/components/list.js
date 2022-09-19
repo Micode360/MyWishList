@@ -53,6 +53,7 @@ const List = () => {
             </div>
             <div className="pt-1 pb-2 px-2">
                 <span className="inline-block bg-[#fe8b00] rounded-full px-2 py-1 text-xs font-semibold text-white mr-1 mb-2">#Action</span>
+                
             </div>
             </div>
 
