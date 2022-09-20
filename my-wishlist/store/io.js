@@ -9,7 +9,10 @@ export const ioSlice = createSlice({
   name: "utils",
   initialState,
   reducers: {
+    //Actions
     addWish: (state, action) => {
+        //You will have to use thunk but first add inputs
+        console.log(action, "action");
         state.addWishResponse = action.payload; 
     }
   },

@@ -15,7 +15,7 @@ const Banner = () => {
                 height={200}
             />
             
-            <div className={`${styles.banner} flex items-center absolute top-0 bottom-0 left-0 right-0 z-10`}>
+            <div className={`${styles.banner} flex items-center absolute top-0 bottom-1 left-0 right-0 z-10`}>
                 <h1 className='text-white ml-[20%] text-[1.5rem]'>View my wishList</h1>
             </div>
         </div>

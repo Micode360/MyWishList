@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         'wish-blue': '#1f4e79',
+        'wish-blue-dark': '#143655',
         'wish-orange': '#c85c11',
         'wish-gray': '#444444',
         'white-200': '#f2f2f2',
