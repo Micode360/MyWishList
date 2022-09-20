@@ -3,7 +3,7 @@
 
 const Darshboard = () => {
     return (
-        <div className="bg-white-400 border-[1px] rounded border-slate-200 p-3">
+        <div className="bg-white-400 border-[1px] rounded-lg border-slate-200 p-3">
             
             <div className="mb-4 bg-white-400 border-b-[1px] border-slate-200 py-1"><h3>You have created {14} wishlists </h3></div>
 
