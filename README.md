@@ -12,13 +12,7 @@ This is the front end section application.
 
 After pulling code from github take the following steps:
 
-First enter into the my-wishlist folder:
-
-```bash
-cd my-wishlist
-```
-
-Run the command to install the packages.
+First run the command to install the packages.
 
 ```bash
 yarn install
