@@ -18,6 +18,6 @@ export const ioSlice = createSlice({
   },
 });
 
-export const { showModal } = ioSlice.actions;
+export const { addWish } = ioSlice.actions;
 
 export default ioSlice.reducer;
