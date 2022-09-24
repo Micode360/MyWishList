@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     addWishResponse: false,
+    message: ""
 };
 
 export const ioSlice = createSlice({
@@ -13,7 +14,8 @@ export const ioSlice = createSlice({
     addWish: (state, action) => {
         //You will have to use thunk but first add inputs
         console.log(action, "action");
-        state.addWishResponse = action.payload; 
+        state.addWishResponse = action.payload.bool;
+        state.addWishResponse = action.payload.message; 
     }
   },
 });

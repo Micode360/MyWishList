@@ -3,3 +3,37 @@
   background: rgb(254,133,0);
   background: linear-gradient(90deg, rgba(254,133,0,0.1881127450980392) 0%, rgba(254,133,0,1) 22%, rgba(248,58,0,1) 100%);
 }
+
+$base: #263238;
+$lite:  #FFF;
+$brand: #FF3D00;
+$size: 48px;
+
+
+.loader {
+    width:0;
+    height: $size / 10;
+    display: inline-block;
+    position: relative;
+    background: $lite;
+    box-shadow: 0 0 10px rgba($lite, 0.5);
+    animation: animFw 8s linear infinite;
+    &::after , &::before {
+      content: '';
+      width: 10px;
+      height: 1px;
+      background: $lite;
+      position: absolute;
+      top: 9px;
+      right: -2px;
+      opacity: 0;
+      transform: rotate(-45deg)  translateX(0px);
+      animation: coli1 0.3s linear infinite;
+    }
+    &::before {
+      top: -4px;
+      transform: rotate(45deg);
+      animation: coli2 0.3s linear infinite;
+    }
+}
+
