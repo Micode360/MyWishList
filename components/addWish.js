@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useState } from "react"
-import axios from "axios"
+import { useState } from "react";
+import axios from "axios";
 import { showModal } from "../store/utilsAction";
 import { addWish } from "../store/io";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -11,44 +11,42 @@ const AddWish = () => {
   let selector = useSelector(showModal);
   const dispatch = useDispatch();
 
-  //For file upload
- 
-
   // With Formik
   const initialValues = {
     title: "",
     category: "",
-    description: ""
+    description: "",
   };
 
+
   //Without Formik
-  let [others, setOthers ] = useState({
+  let [others, setOthers] = useState({
     attachment: "",
     attachmentError: "",
     visibility: "",
-    visibilityError: ""
-  })
-
+    visibilityError: "",
+  });
 
   const fileUpload = (e) => {
     let value = e.target.files[0];
     let type = e.target.files[0].type.split("/")[1];
-    console.log(type, "type");
+
     if (
       type.toLowerCase() === "png" ||
       type.toLowerCase() === "jpg" ||
       type.toLowerCase() === "jpeg" ||
       type.toLowerCase() === "webp" ||
+      type.toLowerCase() === "jfif" ||
       type.toLowerCase() === "pdf"
     ) {
-      
-      return setOthers({...others, attachment:value ,attachmentError: ""});
-    } else return setOthers({...others, attachmentError: "Invalid file format"});
+      return setOthers({ ...others, attachment: value, attachmentError: "" });
+    } else
+      return setOthers({ ...others, attachmentError: "Invalid file format" });
   };
 
   const setVisibilty = (e) => {
-    setOthers({...others, visibility: e.target.value, visibilityError: ''});
-  }
+    setOthers({ ...others, visibility: e.target.value, visibilityError: "" });
+  };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
@@ -60,24 +58,29 @@ const AddWish = () => {
   );
 
   const onSubmit = (values) => {
-    if(others.visibility === ""){
-      console.log("in visibility");
-       setOthers({...others, visibilityError: 'Must choose visibility'})
+    if (others.visibility === "") {
+      setOthers({ ...others, visibilityError: "Must choose visibility" });
       return;
     }
 
-    if(others.attachmentError != ""){
+    if (others.attachmentError != "") {
       return;
     }
 
     let formData = new FormData();
-    formData.append('file', others.attachment);
+    formData.append("title", values.title);
+    formData.append("category", values.category);
+    formData.append("description", values.description);
+    formData.append("visibility", others.visibility);
+    formData.append("file", others.attachment);
 
-    let res = { ...values, attachment: others.attachment, visibility: others.visibility };
-    dispatch(addWish(res)); 
 
-    //If you are experiencing an error with serialized data when you are working on this again, please use axios here.
-    //The error is the image. Try to find a way to make the image give you a serialzed image.
+    axios.post('http://localhost:3000/api/postwish',formData)
+    .then((response) => {
+        console.log(response, "response");
+        dispatch(addWish({bool: true, message: 'wish uploaded'}));
+    });
+
   };
 
   if (selector.payload.utils.status) {
@@ -136,9 +139,11 @@ const AddWish = () => {
                   <ErrorMessage name="description" render={renderError} />
 
                   <label className="text-xs text-gray-900 font-medium">
-                    Add an Attachment. ({" "}
+                    Add an Attachment.({" "}
                     <span className="text-red-500">jpg</span>,{" "}
                     <span className="text-red-500">png</span> ,{" "}
+                    <span className="text-red-500">webp</span> ,{" "}
+                    <span className="text-red-500">jfif</span> ,{" "}
                     <span className="text-red-500">pdf</span> ).
                   </label>
                   <label className="w-fit flex items-center px-4 py-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-black mb-2">
@@ -161,7 +166,13 @@ const AddWish = () => {
                     />
                   </label>
 
-                  {others.attachmentError != ""? <p className="text-red-500 text-xs normal-case">{ others.attachmentError }</p>: ''}
+                  {others.attachmentError != "" ? (
+                    <p className="text-red-500 text-xs normal-case">
+                      {others.attachmentError}
+                    </p>
+                  ) : (
+                    ""
+                  )}
 
                   <div className="flex flex-col">
                     <label className="text-xs text-gray-900 font-medium">
@@ -172,7 +183,11 @@ const AddWish = () => {
                         type="button"
                         value={"everyone"}
                         onClick={setVisibilty}
-                        className={others.visibility === "everyone"? `border border-solid border-wish-blue w-fit flex items-center px-4 py-1 rounded text-xs shadow-lg tracking-wide cursor-pointer hover:bg-blue hover:text-black mb-2`: `border border-solid border-gray-200 w-fit flex items-center px-4 py-1 rounded text-xs shadow-lg tracking-wide cursor-pointer hover:bg-blue hover:text-black mb-2`}
+                        className={
+                          others.visibility === "everyone"
+                            ? `border border-solid border-wish-blue w-fit flex items-center px-4 py-1 rounded text-xs shadow-lg tracking-wide cursor-pointer hover:bg-blue hover:text-black mb-2`
+                            : `border border-solid border-gray-200 w-fit flex items-center px-4 py-1 rounded text-xs shadow-lg tracking-wide cursor-pointer hover:bg-blue hover:text-black mb-2`
+                        }
                         name="visibility"
                       >
                         <svg
@@ -200,7 +215,11 @@ const AddWish = () => {
                         type="button"
                         value={"only_me"}
                         onClick={setVisibilty}
-                        className={others.visibility === "only_me"? `border border-solid border-wish-blue w-fit flex items-center px-4 py-1 rounded text-xs shadow-lg tracking-wide cursor-pointer hover:bg-blue hover:text-black mb-2`: `border border-solid border-gray-200 w-fit flex items-center px-4 py-1 rounded text-xs shadow-lg tracking-wide cursor-pointer hover:bg-blue hover:text-black mb-2`}
+                        className={
+                          others.visibility === "only_me"
+                            ? `border border-solid border-wish-blue w-fit flex items-center px-4 py-1 rounded text-xs shadow-lg tracking-wide cursor-pointer hover:bg-blue hover:text-black mb-2`
+                            : `border border-solid border-gray-200 w-fit flex items-center px-4 py-1 rounded text-xs shadow-lg tracking-wide cursor-pointer hover:bg-blue hover:text-black mb-2`
+                        }
                         name="visibility"
                       >
                         <svg
@@ -221,7 +240,13 @@ const AddWish = () => {
                       </button>
                     </div>
 
-                    {others.visibilityError != ""? <p className="text-red-500 text-xs normal-case">{ others.visibilityError }</p>: ''}
+                    {others.visibilityError != "" ? (
+                      <p className="text-red-500 text-xs normal-case">
+                        {others.visibilityError}
+                      </p>
+                    ) : (
+                      ""
+                    )}
                   </div>
 
                   <button
