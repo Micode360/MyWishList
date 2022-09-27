@@ -7,6 +7,7 @@ import WishList from "../components/wishlist";
 import AddWish from "../components/addWish";
 
 const Home = () => {
+
   
   return (
     <div>
@@ -31,8 +32,6 @@ const Home = () => {
     </div>
   );
 }
-
-
 
 
 export default Home;
