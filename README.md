@@ -1,6 +1,6 @@
 # My Wishlist
 
-![wishlist](./public/img/wishlist.png)
+![wishlist](./public/img/wishlist.PNG)
 
 _The application is still been worked on so this is not the final view of the application_
 
