@@ -68,14 +68,12 @@ const handler = (req, res) => {
         };
 
         if (!user) {
-          console.log("Creating User");
           await User.create({
             username: "user",
             list: [listObj],
           });
           response(200, "Your Wishlist has beeen created successfully");
         } else {
-          console.log("Updating User");
           User.updateOne(
             { _id: user._id },
             { $push: { list: listObj } },
@@ -86,7 +84,6 @@ const handler = (req, res) => {
           );
         }
       } catch (error) {
-        console.log(error, "error");
         response(400, error.response);
       }
     });
@@ -94,7 +91,7 @@ const handler = (req, res) => {
 
   const response = (status, response) => {
     res.status(status).json({
-      response,
+      message: response,
     });
   };
 };

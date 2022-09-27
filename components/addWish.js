@@ -6,9 +6,14 @@ import { showModal } from "../store/utilsAction";
 import { addWish } from "../store/io";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Router from 'next/router'
+
+
+
+
 
 const AddWish = () => {
-  let selector = useSelector(showModal);
+  let { io, utils } = useSelector(state => state);
   const dispatch = useDispatch();
 
   // With Formik
@@ -75,17 +80,24 @@ const AddWish = () => {
     formData.append("file", others.attachment);
 
 
+    dispatch(addWish({bool: false, pending: true, message: ""}));
+
     axios.post('http://localhost:3000/api/postwish',formData)
     .then((response) => {
-        console.log(response, "response");
-        dispatch(addWish({bool: true, message: 'wish uploaded'}));
+        console.log(response.data.message, "response");
+        dispatch(addWish({bool: true, pending: false, message: response.data.message}));
+        setTimeout(() =>Router.reload(window.location.pathname), 2000);
     });
 
   };
 
-  if (selector.payload.utils.status) {
+
+  if (utils.status) {
     return (
-      <Formik
+      <>
+          {
+            io.addWishResponse === false?
+            <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { resetForm }) => {
@@ -95,9 +107,10 @@ const AddWish = () => {
       >
         <Form className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
           <div className="relative w-auto my-6 mx-auto max-w-3xl">
-            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div className="overflow-hidden border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              {io.pending === true?<div className="w-full h-1"><div className="w-20 rounded h-1 bg-blue-800 transload"></div></div>: ""}
               <span
-                className="text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none self-end cursor-pointer"
+                className="text-black opacity-1 h-6 w-6 text-2xl block outline-none focus:outline-none self-end cursor-pointer"
                 onClick={() => dispatch(showModal(false))}
               >
                 ×
@@ -275,6 +288,28 @@ const AddWish = () => {
           </div>
         </Form>
       </Formik>
+      :
+      <div className="fixed z-10 inset-0 bg-gray-900 opacity-75">
+         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="z-20 border-0 rounded-lg shadow-lg relative flex flex-col justify-center items-center px-5 py-8 w-full bg-white outline-none focus:outline-none">
+            <span
+                className="text-black opacity-1 h-6 w-6 text-2xl block outline-none focus:outline-none self-end cursor-pointer absolute top-0 right-0"
+                onClick={() => dispatch(showModal(false))}
+              >
+                ×
+              </span>
+              
+                <svg xmlns="http://www.w3.org/2000/svg" fill="orange" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 mb-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
+                <p>{`${io.message}`}</p>
+            </div>
+            </div>             
+            </div>
+      </div>
+      }
+      </>
     );
   }
 };
