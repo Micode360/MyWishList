@@ -1,6 +1,6 @@
 # My Wishlist
 
-![wishlist](./public/img/wishlist.PNG)
+![wishlist](./public/img/wishlist.png)
 
 _The application is still been worked on so this is not the final view of the application_
 
@@ -24,10 +24,5 @@ yarn run dev
 ```
 
 And boom. the application runs on your local server.
-
-## Something to note about
-
-At the moment, this project is not authenticated. So it's programmed for one user. There is still a high possibility of the project being authenticated in the future. 
-
 
 
