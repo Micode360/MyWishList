@@ -31,14 +31,13 @@ const handler = (req, res) => {
               folder: "wishlist",
             });
 
-
         const user = await User.findOne({ username: "user" });
-
         let listObj = {
           title: fields.title,
           category: fields.category === "" ? "others" : fields.category,
           description: fields.description,
           visibility: fields.visibility,
+          date: Date.now(),
           attachment:
             imageResponse === ""
               ? {

@@ -12,8 +12,8 @@ body {
 }
 
 $base: #263238;
-$lite:  #FFF;
-$brand: #FF3D00;
+$lite: #fff;
+$brand: #ff3d00;
 $size: 48px;
 
 a {
@@ -26,20 +26,24 @@ a {
 }
 
 .banner {
-  background: rgb(254,133,0);
-  background: linear-gradient(90deg, rgba(254,133,0,0.1881127450980392) 0%, rgba(254,133,0,1) 22%, rgba(248,58,0,1) 100%);
+  background: rgb(254, 133, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(254, 133, 0, 0.1881127450980392) 0%,
+    rgba(254, 133, 0, 1) 22%,
+    rgba(248, 58, 0, 1) 100%
+  );
 }
 
 .transload {
-    animation: transload ease-in-out 1s infinite;
+  animation: transload ease-in-out 1s infinite;
 }
 
-
 @keyframes transload {
-    0% {
-      transform: translate(0px)
-    }
-    100%{
-      transform: translate(400px)
-    }
+  0% {
+    transform: translate(0px);
+  }
+  100% {
+    transform: translate(400px);
+  }
 }
