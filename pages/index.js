@@ -1,14 +1,17 @@
 import Head from "next/head";
-import axios from "axios";
+import { getRequest } from "../lib/requests";
+import { getUser } from "../store/user";
+import { useDispatch } from "react-redux";
 import Banner from "../components/banner";
 import Darshboard from "../components/darshboard";
 import SearchBar from "../components/searchBar";
 import WishList from "../components/wishlist";
 import AddWish from "../components/addWish";
 
-const Home = () => {
+const Home = ({ user }) => {
+  let dispatch = useDispatch();
+  dispatch(getUser(user));
 
-  
   return (
     <div>
       <Head>
@@ -31,7 +34,18 @@ const Home = () => {
       </section>
     </div>
   );
-}
+};
 
+export async function getServerSideProps() {
+  const user = await getRequest(
+    `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
+  );
+
+  return {
+    props: {
+      user: user,
+    },
+  };
+}
 
 export default Home;

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 const NotFound = () => {
   return (
@@ -8,9 +8,13 @@ const NotFound = () => {
       </h1>
       <div className="bg-wish-blue text-white px-2 text-sm rounded rotate-12 absolute">
         Page Not Found
-      </div>    
-            <Link href="/"><span className='text-white cursor-pointer hover:underline'>Go Home</span></Link>
-  </div>
+      </div>
+      <Link href="/">
+        <span className="text-white cursor-pointer hover:underline">
+          Go Home
+        </span>
+      </Link>
+    </div>
   );
 };
 
