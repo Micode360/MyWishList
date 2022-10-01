@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../store/utilsAction";
 
-const Description = () => {
+function Description() {
   const dispatch = useDispatch();
   const { utils, io } = useSelector((state) => state);
 
@@ -32,7 +32,7 @@ const Description = () => {
 
                 <div className="flex justify-center mb-4 w-full pb-6 bg-white-400 border-b-[1px] border-slate-200">
                   <img
-                    className="shrink-0 w-[60%] object-cover rounded"
+                    className="shrink-0 w-[40%] object-cover rounded"
                     src={io.readWish.attachment.secure_url}
                     alt="img"
                   />
@@ -48,6 +48,6 @@ const Description = () => {
       )}
     </>
   );
-};
+}
 
 export default Description;
