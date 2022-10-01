@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   type: "none",
   selectedOption: null,
+  colors: ["red", "blue", "green"],
 };
 
 export const utilSlice = createSlice({

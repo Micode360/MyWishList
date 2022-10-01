@@ -7,6 +7,7 @@ import Darshboard from "../components/darshboard";
 import SearchBar from "../components/searchBar";
 import WishList from "../components/wishlist";
 import AddWish from "../components/addWish";
+import Description from "../components/description";
 
 const Home = ({ user }) => {
   let dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Home = ({ user }) => {
           </div>
           <WishList />
           <AddWish />
+          <Description />
         </div>
       </section>
     </div>
