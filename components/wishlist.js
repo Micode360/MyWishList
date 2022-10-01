@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectedOption, showModal } from "../store/utilsAction";
-import { deleteWish } from "../store/io";
+import { deleteWish, readWish } from "../store/io";
 import NotificationModal from "./notificationModal";
 
 const WishList = () => {
@@ -11,11 +11,7 @@ const WishList = () => {
   useEffect(() => {
     window.onclick = (e) => {
       let className = e.path[0].className;
-
-      if (
-        utils.selectedOption !== null &&
-        className.animVal !== "w-6 h-6 absolute right-0 cursor-pointer opt"
-      ) {
+      if (className.animVal !== "w-6 h-6 absolute right-0 cursor-pointer opt") {
         dispatch(selectedOption(null));
       }
     };
@@ -24,7 +20,7 @@ const WishList = () => {
   return (
     <>
       <div className="flex justify-center align-center md:px-5 lg:px-5 xl:px-5">
-        <div className="bg-white-400 border-[1px] rounded-lg border-slate-200 w-full md:w-[18rem] lg:w-[18rem] xl:w-[18rem] min-h-fit justify-center">
+        <div className="bg-white-400 border-[1px] rounded-lg border-slate-200 w-full md:w-[18rem] lg:w-[18rem] xl:w-[18rem] min-h-fit max-h-[18.5rem] justify-center">
           <div className="p-2 border-b-[1px] border-slate-200">
             <h1 className="font-semibold text-sm">Recently added</h1>
           </div>
@@ -45,7 +41,13 @@ const WishList = () => {
                         src={list.attachment.secure_url}
                         alt="img"
                       />
-                      <div className="ltr:ml-3 rtl:mr-3 ml-3 cursor-pointer">
+                      <div
+                        className="ltr:ml-3 rtl:mr-3 ml-3 cursor-pointer"
+                        onClick={() => {
+                          dispatch(showModal("readModal"));
+                          dispatch(readWish({ ...list }));
+                        }}
+                      >
                         <p className="text-sm font-medium text-black-300">
                           {list.title}
                         </p>
@@ -62,11 +64,12 @@ const WishList = () => {
                         strokeWidth={1.5}
                         stroke="currentColor"
                         className="w-6 h-6 absolute right-0 cursor-pointer opt"
-                        onClick={(e) =>
+                        onClick={(e) => {
+                          console.log(e.target.parentNode.id, "id");
                           dispatch(
                             selectedOption(Number(e.target.parentNode.id))
-                          )
-                        }
+                          );
+                        }}
                       >
                         <path
                           strokeLinecap="round"

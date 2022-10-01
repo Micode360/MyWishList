@@ -6,6 +6,7 @@ const initialState = {
     pending: false,
     message: "",
   },
+  readWish: {},
   deleteWish: {
     status: "none",
     pending: false,
@@ -28,6 +29,10 @@ export const ioSlice = createSlice({
       state.addWish.pending = pending;
       state.addWish.message = message;
     },
+    readWish: (state, action) => {
+      let list = action.payload;
+      state.readWish = list;
+    },
     deleteWish: (state, action) => {
       let { status, pending, message, list } = action.payload;
       if (pending === true) {
@@ -42,6 +47,6 @@ export const ioSlice = createSlice({
   },
 });
 
-export const { addWish, deleteWish } = ioSlice.actions;
+export const { addWish, readWish, deleteWish } = ioSlice.actions;
 
 export default ioSlice.reducer;

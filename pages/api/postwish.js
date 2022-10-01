@@ -76,7 +76,7 @@ const handler = (req, res) => {
           User.updateOne(
             { _id: user._id },
             { $push: { list: listObj } },
-            (err, data, done) => {
+            (err, data) => {
               if (err) res.json(err);
               response(200, "Your Wishlist has beeen created successfully");
             }
