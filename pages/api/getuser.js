@@ -6,11 +6,6 @@ const handler = async (req, res) => {
   const { method } = req;
 
   if (method === "GET") {
-
-    const id = setTimeout(() => res.json({
-      message: "There was an error with the user service!"
-  }), 7000);
-
     try {
       const user = await User.findOne({ username: "user" });
       if (user) {
@@ -34,7 +29,6 @@ const handler = async (req, res) => {
           username: user.username,
           list: userList,
         };
-        clearTimeout(id)
         res.status(200).json(userResponse);
       }
     } catch (e) {
