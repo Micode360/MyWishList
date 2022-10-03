@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Image from "next/image"
 import { useSelector, useDispatch } from "react-redux";
 import { selectedOption, showModal } from "../store/utilsAction";
 import { deleteWish, readWish } from "../store/io";
@@ -15,7 +16,7 @@ const WishList = () => {
         dispatch(selectedOption(null));
       }
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -36,10 +37,12 @@ const WishList = () => {
                       id={index}
                       key={list.id}
                     >
-                      <img
+                      <Image
                         className="shrink-0 h-12 w-12 object-cover rounded"
                         src={list.attachment.secure_url}
                         alt="img"
+                        width={50}
+                        height={50}
                       />
                       <div
                         className="ltr:ml-3 rtl:mr-3 ml-3 cursor-pointer"

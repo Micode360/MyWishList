@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../store/utilsAction";
 
@@ -31,11 +32,14 @@ function Description() {
                 </div>
 
                 <div className="flex justify-center mb-4 w-full pb-6 bg-white-400 border-b-[1px] border-slate-200">
-                  <img
-                    className="shrink-0 w-[40%] object-cover rounded"
-                    src={io.readWish.attachment.secure_url}
-                    alt="img"
-                  />
+                  <div className="relative w-[60%] h-[20rem]">
+                      <Image
+                        className="shrink-0 object-cover rounded"
+                        src={io.readWish.attachment.secure_url}
+                        alt="img"
+                        layout="fill"
+                      />
+                  </div>
                 </div>
 
                 <p>{io.readWish.description}</p>
