@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from 'next/router';
 import { getRequest } from "../lib/requests";
 import { getUser } from "../store/user";
 import { useDispatch } from "react-redux";
@@ -10,14 +11,17 @@ import AddWish from "../components/addWish";
 import Description from "../components/description";
 
 const Home = ({ user }) => {
+  const router = useRouter();
   let dispatch = useDispatch();
   dispatch(getUser(user));
+
+  console.log(router, "router");
 
   return (
     <div>
       <Head>
         <title>My Wish List</title>
-        <meta name="description" content="My Wishlist init" />
+        <meta name="description" content="My Wishlist" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

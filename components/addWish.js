@@ -76,7 +76,7 @@ const AddWish = () => {
     dispatch(addWish({ bool: false, pending: true, message: "" }));
 
     axios
-      .post("http://localhost:3000/api/postwish", formData)
+      .post(`${process.env.NEXT_PUBLIC_DORMAIN}/api/postwish`, formData)
       .then((response) => {
         dispatch(
           addWish({
