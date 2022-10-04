@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { getRequest } from "../lib/requests";
 import { getUser } from "../store/user";
 import { useDispatch } from "react-redux";
@@ -14,8 +14,6 @@ const Home = ({ user }) => {
   const router = useRouter();
   let dispatch = useDispatch();
   dispatch(getUser(user));
-
-  console.log(router, "router");
 
   return (
     <div>

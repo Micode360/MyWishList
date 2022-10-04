@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Image from "next/image"
+import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { selectedOption, showModal } from "../store/utilsAction";
 import { deleteWish, readWish } from "../store/io";
@@ -68,7 +68,6 @@ const WishList = () => {
                         stroke="currentColor"
                         className="w-6 h-6 absolute right-0 cursor-pointer opt"
                         onClick={(e) => {
-                          console.log(e.target.parentNode.id, "id");
                           dispatch(
                             selectedOption(Number(e.target.parentNode.id))
                           );
@@ -116,9 +115,9 @@ const WishList = () => {
                     </div>
                   ))
               : ""}
-            <div className="text-xs text-center pt-2 cursor-pointer">
+            {/* <div className="text-xs text-center pt-2 cursor-pointer">
               View more
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const Darshboard = () => {
   const { user, utils } = useSelector((state) => state);
@@ -12,10 +13,10 @@ const Darshboard = () => {
     );
   };
 
-  let categoryLength = (category) =>
+  let categoryList = (category) =>
     [...user.user.list].filter(
       (wish) => wish.category.toLowerCase() === category
-    ).length;
+    );
 
   return (
     <div className="bg-white-400 border-[1px] rounded-lg border-slate-200 p-3">
@@ -32,18 +33,26 @@ const Darshboard = () => {
         {categories().map((category, index) => {
           let val = 0;
           return (
-            <div
-              className={`${
-                val === utils.colors.length
-                  ? utils.colors[(val = 0)]
-                  : utils.colors[(val = index)]
-              } flex justify-center items-center text-center bg-wish-blue m-1 text-white rounded h-[5rem] cursor-pointer`}
-              onClick={() => console.log("hover active")}
+            <Link
+              href={{
+                pathname: "/category",
+                query: { category: category },
+              }}
               key={index}
             >
-              {category.charAt(0).toUpperCase()}
-              {category.slice(1).toLowerCase()} ({categoryLength(category)})
-            </div>
+              <div
+                className={`${
+                  val === utils.colors.length
+                    ? utils.colors[(val = 0)]
+                    : utils.colors[(val = index)]
+                } flex justify-center items-center text-center bg-wish-blue m-1 text-white rounded h-[5rem] cursor-pointer`}
+                onClick={() => console.log("hover active")}
+              >
+                {category.charAt(0).toUpperCase()}
+                {category.slice(1).toLowerCase()} (
+                {categoryList(category).length})
+              </div>
+            </Link>
           );
         })}
       </div>
