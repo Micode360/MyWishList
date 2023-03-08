@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectedOption, showModal } from "../store/utilsAction";
 import { deleteWish, readWish } from "../store/io";
 import NotificationModal from "./notificationModal";
+import { toDate } from "../lib/date";
 
 const WishList = () => {
   let { user, utils } = useSelector((state) => state);
@@ -11,12 +12,14 @@ const WishList = () => {
 
   useEffect(() => {
     window.onclick = (e) => {
-      let className = e.path[0].className;
+      let className = e.target.className;
+
       if (className.animVal !== "w-6 h-6 absolute right-0 cursor-pointer opt") {
         dispatch(selectedOption(null));
       }
     };
   }, [dispatch]);
+
 
   return (
     <>
@@ -57,7 +60,7 @@ const WishList = () => {
                         <p className="text-xs font-medium text-slate-500">
                           {list.category}
                         </p>
-                        <p className="text-xs font-medium text-slate-500">{`date`}</p>
+                        <p className="text-xs font-medium text-slate-500">{`${toDate(list.date)}`}</p>
                       </div>
 
                       <svg

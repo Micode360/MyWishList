@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../store/utilsAction";
+import { toDate } from "../lib/date";
 
 function Description() {
   const dispatch = useDispatch();
   const { utils, io } = useSelector((state) => state);
+
 
   return (
     <>
@@ -28,7 +30,7 @@ function Description() {
                   <p className="px-2 w-fit bg-wish-orange rounded text-white mb-2">
                     {io.readWish.category}
                   </p>
-                  <p className="text-xs">1st, October 2022</p>
+                  <p className="text-xs">{toDate(io.readWish.date)}</p>
                 </div>
 
                 <div className="flex justify-center mb-4 w-full pb-6 bg-white-400 border-b-[1px] border-slate-200">

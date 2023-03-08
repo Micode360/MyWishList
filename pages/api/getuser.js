@@ -10,12 +10,14 @@ const handler = async (req, res) => {
       const user = await User.findOne({ username: "user" });
       if (user) {
         let userList = user.list.map((user) => {
+
           let list = {
             id: user._id,
             category: user.category,
             description: user.description,
             title: user.title,
             visibility: user.visibility,
+            date: user.date,
             attachment: {
               public_id: user.attachment.public_id,
               secure_url: user.attachment.secure_url,

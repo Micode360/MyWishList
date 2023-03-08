@@ -30,31 +30,41 @@ const Darshboard = () => {
         <h3>Categories</h3>
       </div>
       <div className="grid grid-cols-3 gap-0">
-        {categories().map((category, index) => {
-          let val = 0;
-          return (
-            <Link
-              href={{
-                pathname: "/category",
-                query: { category: category },
-              }}
-              key={index}
-            >
-              <div
-                className={`${
-                  val === utils.colors.length
-                    ? utils.colors[(val = 0)]
-                    : utils.colors[(val = index)]
-                } flex justify-center items-center text-center bg-wish-blue m-1 text-white rounded h-[5rem] cursor-pointer`}
-                onClick={() => console.log("hover active")}
+        {categories()
+          .filter((category) => {
+            if (utils.categorySearchValue === "") return category;
+            else if (
+              utils.categorySearchValue
+                .toLowerCase()
+                .includes(category.toLowerCase())
+            )
+              return category;
+            return false;
+          })
+          .map((category, index) => {
+            let val = 0;
+            return (
+              <Link
+                href={{
+                  pathname: "/category",
+                  query: { category: category },
+                }}
+                key={index}
               >
-                {category.charAt(0).toUpperCase()}
-                {category.slice(1).toLowerCase()} (
-                {categoryList(category).length})
-              </div>
-            </Link>
-          );
-        })}
+                <div
+                  className={`${
+                    val === utils.colors.length
+                      ? utils.colors[(val = 0)]
+                      : utils.colors[(val = index)]
+                  } flex justify-center items-center text-center bg-wish-blue m-1 text-white rounded h-[5rem] cursor-pointer`}
+                >
+                  {category.charAt(0).toUpperCase()}
+                  {category.slice(1).toLowerCase()} (
+                  {categoryList(category).length})
+                </div>
+              </Link>
+            );
+          })}
       </div>
     </div>
   );
