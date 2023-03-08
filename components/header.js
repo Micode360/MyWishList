@@ -3,15 +3,14 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { showModal } from "../store/utilsAction";
 
-const Header = () => {
+const Header = (props) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [pathname, setPathname] = useState("");
 
   useEffect(() => {
-    setPathname(window.location.pathname.split("/")[1]);
-  }, [setPathname]);
-
+    setPathname(router.pathname.split("/")[1]);
+  }, [router.pathname]);
 
 
   return (

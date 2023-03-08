@@ -130,7 +130,7 @@ const AddWish = () => {
                   <div className="relative pb-6 px-6 flex-auto">
                     <div className="mx-auto max-w-xs">
                       <label className="text-xs text-gray-900 font-medium">
-                        Title of your wish <sup className="text-red-500">*</sup>
+                        Title of your wish. <sup className="text-red-500">*</sup>
                       </label>
                       <Field
                         className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-200 placeholder-gray-500 text-xs focus:outline-none focus:border-gray-400 focus:bg-white mb-2"
@@ -141,12 +141,13 @@ const AddWish = () => {
                       <ErrorMessage name="title" render={renderError} />
 
                       <label className="text-xs text-gray-900 font-medium">
-                        Add to a category
+                        Add to a category. (Maximun length of 16 characters)
                       </label>
                       <Field
                         className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-200 placeholder-gray-500 text-xs focus:outline-none focus:border-gray-400 focus:bg-white mb-2"
                         type="text"
                         name="category"
+                        maxlength="16"
                         placeholder="Add or create a category"
                       />
 
