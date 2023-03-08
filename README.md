@@ -2,7 +2,6 @@
 
 ![wishlist](./public/img/wishlist.PNG)
 
-_The application is still been worked on so this is not the final view of the application_
 
 My wish list is a web application where a user can list down
 his or her wish, expectations and goals for future purposes.

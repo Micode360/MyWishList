@@ -4,10 +4,12 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { SearchIcon } from "@heroicons/react/solid";
 import { getRequest } from "../lib/requests";
+import { toDate } from "../lib/date";
 import { useSelector, useDispatch } from "react-redux";
-import { selectedOption, showModal } from "../store/utilsAction";
+import { selectedOption, showModal, searchWish } from "../store/utilsAction";
 import NotificationModal from "../components/notificationModal";
 import { deleteWish, readWish } from "../store/io";
+import Description from "../components/description";
 
 const Category = ({ User }) => {
   const router = useRouter();
@@ -17,7 +19,7 @@ const Category = ({ User }) => {
 
   useEffect(() => {
     window.onclick = (e) => {
-      let className = e.path[0].className;
+      let className = e.target.className;
       if (className.animVal !== "w-6 h-6 absolute right-0 cursor-pointer opt") {
         dispatch(selectedOption(null));
       }
@@ -45,8 +47,9 @@ const Category = ({ User }) => {
               type="text"
               id="search"
               name="search"
+              onChange={(e) => dispatch(searchWish(e.target.value))}
               className="w-full py-1 rounded-full bg-gray-100 border border-gray-200 placeholder-gray-500 text-xs focus:outline-none focus:border-orange-400 focus:bg-white px-3 mr-1"
-              placeholder="Search wish"
+              placeholder="Search wish title"
             />
             <SearchIcon className="w-[1.3rem] text-wish-orange" />
           </div>
@@ -83,8 +86,19 @@ const Category = ({ User }) => {
                 wish.category.toLowerCase() ===
                 route.query.category.toLowerCase()
             )
-            .map((wish, index) => {
-              return (
+            .filter((wish) => {
+              if (utils.wishSearchValue === "") return wish;
+
+              const searchValue = utils.wishSearchValue.toLowerCase();
+              const words = wish.title.toLowerCase().split(" ");
+
+              for (let i = 0; i < words.length; i++) {
+                if (searchValue.includes(words[i])) {
+                  return wish;
+                }
+              }
+            })
+            .map((wish, index) => (
                 <div
                   className="relative bg-white-400 border-[1px] rounded-lg mb-4 border-slate-200 p-3 font-medium flex items-center"
                   key={index}
@@ -102,11 +116,17 @@ const Category = ({ User }) => {
                       />
                     )}
                   </div>
-                  <div className="cursor-pointer">
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => {
+                      dispatch(showModal("readModal"));
+                      dispatch(readWish({ ...wish }));
+                    }}
+                  >
                     <h1 className="text-xl">{wish.title}</h1>
                     <p className="text-xs font-normal">{wish.description}</p>
                     <span className="text-gray-400 text-[0.6rem] font-normal">
-                      Created at 3rd October 2022
+                      Created at {toDate(wish.date)}
                     </span>
                   </div>
 
@@ -118,7 +138,7 @@ const Category = ({ User }) => {
                     stroke="currentColor"
                     className="w-6 h-6 absolute right-0 cursor-pointer opt"
                     onClick={(e) => {
-                      dispatch(selectedOption(Number(e.target.parentNode.id)));
+                      dispatch(selectedOption(index));
                     }}
                   >
                     <path
@@ -128,7 +148,7 @@ const Category = ({ User }) => {
                     />
                   </svg>
                   {utils.selectedOption === index ? (
-                    <div className="absolute right-[-10px] top-12 text-xs">
+                    <div className="absolute top-20 right-[-10px] text-xs">
                       <div
                         className="px-2 border-[1px] border-slate-200 bg-white rounded cursor-pointer"
                         onClick={() => {
@@ -157,10 +177,11 @@ const Category = ({ User }) => {
 
                   {utils.type === "deleteModal" ? <NotificationModal /> : ""}
                 </div>
-              );
-            })
+              )
+            )
         )}
       </section>
+      <Description />
     </div>
   );
 };
