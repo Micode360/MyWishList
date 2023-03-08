@@ -29,7 +29,7 @@ const Darshboard = () => {
       <div className="py-1 mb-4">
         <h3>Categories</h3>
       </div>
-      <div className="grid grid-cols-3 gap-0">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-0">
         {categories()
           .filter((category) => {
             if (utils.categorySearchValue === "") return category;
