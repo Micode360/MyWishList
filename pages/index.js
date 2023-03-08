@@ -42,7 +42,7 @@ const Home = ({ user }) => {
 
 export async function getServerSideProps() {
   const user = await getRequest(
-    `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
+    `/api/getuser`
   );
 
   return {
