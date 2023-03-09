@@ -20,7 +20,6 @@ const WishList = () => {
     };
   }, [dispatch]);
 
-
   return (
     <>
       <div className="flex justify-center align-center md:px-5 lg:px-5 xl:px-5">
@@ -40,13 +39,19 @@ const WishList = () => {
                       id={index}
                       key={list.id}
                     >
-                      <Image
-                        className="shrink-0 h-12 w-12 object-cover rounded"
-                        src={list.attachment.secure_url}
-                        alt="img"
-                        width={50}
-                        height={50}
-                      />
+                      {list.attachment.secure_url === "none" ? (
+                        (
+                          <div className="relative w-12 h-12 rounded bg-wish-orange mr-2"></div>
+                        )
+                      ) : (
+                        <Image
+                          className="shrink-0 h-12 w-12 object-cover rounded"
+                          src={list.attachment.secure_url}
+                          alt="img"
+                          width={50}
+                          height={50}
+                        />
+                      )}
                       <div
                         className="ltr:ml-3 rtl:mr-3 ml-3 cursor-pointer"
                         onClick={() => {
@@ -60,7 +65,9 @@ const WishList = () => {
                         <p className="text-xs font-medium text-slate-500">
                           {list.category}
                         </p>
-                        <p className="text-xs font-medium text-slate-500">{`${toDate(list.date)}`}</p>
+                        <p className="text-xs font-medium text-slate-500">{`${toDate(
+                          list.date
+                        )}`}</p>
                       </div>
 
                       <svg

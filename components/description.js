@@ -7,7 +7,6 @@ function Description() {
   const dispatch = useDispatch();
   const { utils, io } = useSelector((state) => state);
 
-
   return (
     <>
       {utils.type === "readModal" ? (
@@ -35,12 +34,16 @@ function Description() {
 
                 <div className="flex justify-center mb-4 w-full pb-6 bg-white-400 border-b-[1px] border-slate-200">
                   <div className="relative w-[60%] h-[20rem]">
-                    <Image
-                      className="shrink-0 object-cover rounded"
-                      src={io.readWish.attachment.secure_url}
-                      alt="img"
-                      layout="fill"
-                    />
+                    {io.readWish.attachment.secure_url === "none" ? (
+                      <div className="relative w-full h-full rounded bg-wish-orange mr-2"></div>
+                    ) : (
+                      <Image
+                        className="shrink-0 object-cover rounded"
+                        src={io.readWish.attachment.secure_url}
+                        alt="img"
+                        layout="fill"
+                      />
+                    )}
                   </div>
                 </div>
 
