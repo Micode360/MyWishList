@@ -9,12 +9,11 @@ import SearchBar from "../components/searchBar";
 import WishList from "../components/wishlist";
 import AddWish from "../components/addWish";
 import Description from "../components/description";
-import data from "./api/data.json"
 
-const Home = () => {
+const Home = ({ user }) => {
   const router = useRouter();
   let dispatch = useDispatch();
-  dispatch(getUser(data));
+  dispatch(getUser(user));
 
   return (
     <div>
