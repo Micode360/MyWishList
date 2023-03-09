@@ -41,13 +41,16 @@ const Home = ({ user }) => {
 };
 
 export async function getServerSideProps() {
-  const user = await getRequest(
-    `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
-  );
+  // const user = await getRequest(
+  //   `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
+  // );
+  //testing
+  const res = await fetch(`https://mywishlist-production.up.railway.app/api/getuser`)
+  const data = await res.json()
 
   return {
     props: {
-      user: user,
+      user: data,
     },
   };
 }
