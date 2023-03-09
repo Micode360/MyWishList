@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-//import { getRequest } from "../lib/requests";
+import { getRequest } from "../lib/requests";
 import { getUser } from "../store/user";
 import { useDispatch } from "react-redux";
 import Banner from "../components/banner";
@@ -11,11 +11,12 @@ import AddWish from "../components/addWish";
 import Description from "../components/description";
 import data from "./api/data.json"
 
-const Home = ({ user }) => {
+const Home = () => {
   const router = useRouter();
   let dispatch = useDispatch();
-  dispatch(getUser(user));
+  dispatch(getUser(data));
 
+  
   return (
     <div>
       <Head>
@@ -41,16 +42,18 @@ const Home = ({ user }) => {
   );
 };
 
-export async function getServerSideProps() {
-  // const user = await getRequest(
-  //   `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
-  // );
+// export async function getServerSideProps() {
+//   const user = await getRequest(
+//     `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
+//   );
 
-  return {
-    props: {
-      user: data,
-    },
-  };
-}
+
+
+//   return {
+//     props: {
+//       user: user,
+//     },
+//   };
+// }
 
 export default Home;
