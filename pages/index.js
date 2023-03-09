@@ -9,14 +9,12 @@ import SearchBar from "../components/searchBar";
 import WishList from "../components/wishlist";
 import AddWish from "../components/addWish";
 import Description from "../components/description";
-import data from "./api/data.json"
 
-const Home = () => {
+const Home = ({ user }) => {
   const router = useRouter();
   let dispatch = useDispatch();
-  dispatch(getUser(data));
+  dispatch(getUser(user));
 
-  
   return (
     <div>
       <Head>
@@ -42,18 +40,16 @@ const Home = () => {
   );
 };
 
-// export async function getServerSideProps() {
-//   const user = await getRequest(
-//     `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
-//   );
+export async function getServerSideProps() {
+  const user = await getRequest(
+    `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
+  );
 
-
-
-//   return {
-//     props: {
-//       user: user,
-//     },
-//   };
-// }
+  return {
+    props: {
+      user: user,
+    },
+  };
+}
 
 export default Home;
