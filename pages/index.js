@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getRequest } from "../lib/requests";
+//import { getRequest } from "../lib/requests";
 import { getUser } from "../store/user";
 import { useDispatch } from "react-redux";
 import Banner from "../components/banner";
@@ -9,6 +9,7 @@ import SearchBar from "../components/searchBar";
 import WishList from "../components/wishlist";
 import AddWish from "../components/addWish";
 import Description from "../components/description";
+import data from "./api/data.json"
 
 const Home = ({ user }) => {
   const router = useRouter();
@@ -44,9 +45,6 @@ export async function getServerSideProps() {
   // const user = await getRequest(
   //   `${process.env.NEXT_PUBLIC_DORMAIN}/api/getuser`
   // );
-  //testing
-  const res = await fetch(`https://mywishlist-production.up.railway.app/api/getuser`)
-  const data = await res.json()
 
   return {
     props: {
