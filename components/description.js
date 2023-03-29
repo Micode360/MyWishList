@@ -13,7 +13,7 @@ function Description() {
         <div className="fixed z-10 inset-0">
           <div className="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="w-auto mx-auto max-w-3xl">
-              <div className="overflow-y-auto z-20 border-0 rounded-lg absolute top-0 right-0 bottom-0 shadow-lg flex flex-col justify-start items-start py-6 px-5 pb-8 overflow-hidden md:w-[40%] lg:w-[40%] xl:w-[40%] bg-white outline-none focus:outline-none">
+              <div className="overflow-y-auto z-20 border-0 rounded-lg absolute top-0 right-0 bottom-0 shadow-lg flex flex-col justify-start items-start py-6 px-5 pb-8 overflow-hidden w-full md:w-[40%] lg:w-[40%] xl:w-[40%] bg-white outline-none focus:outline-none">
                 <span
                   className="text-black opacity-1 h-6 w-6 text-2xl block outline-none focus:outline-none self-end cursor-pointer absolute top-0 right-0"
                   onClick={() => {
