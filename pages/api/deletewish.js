@@ -14,7 +14,6 @@ const handler = async (req, res) => {
 
   if (method === "POST") {
     let body = req.body;
-    console.log(body, "body");
 
     if (body.imgid !== "none") {
       await cloudinary.uploader.destroy(body.imgid);
